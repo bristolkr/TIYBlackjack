@@ -1,0 +1,34 @@
+Plan:
+  card.rb (Card class) (use arrays)
+    - use to designate each of the 52 cards 
+    - must use suits (13 cards per suit)
+    - must use face cards 
+
+  deck.rb (Deck class) (use hashes of arrays)
+    - use to organize Card class into a deck (inherited >> Card)
+      
+  blackjack.rb (Main game file: inherit Deck class, declare methods, create UI)
+    - must be able to randomize deck (does this method exist?)
+    - must be able to re-initialize deck after each game
+    - must be able to receive player input
+    - must be able to track and display both hands of cards
+    - must be able to obscure the 2nd of the dealer's cards
+    - must obey by the blackjack rules:
+      - to win: 
+        - player blackjack
+        - higher hand without going over 21
+        - dealer busts
+      - to lose: 
+        - dealer blackjack (unless player also blackjack)
+        - dealer has higher hand without going over 21
+        - player busts
+      - to draw:
+        - player and dealer both receive blackjack on initial deal
+        - dealer holds on 16, player also opts to hold on 16
+      - initial deal: two cards
+        - if initial deal does not bust or blackjack, player and dealer take turns deciding to stay or hit
+      - loop re-eval until win/loss conditionals met
+      - player declares ace as 1 or 11 (if cannot make the either/or work, at least make aces high work)
+      - tracking progress (W/L/D)
+      - dealer hits below 16
+
