@@ -41,22 +41,23 @@ puts "@@@@@@      @@        @@@@@@@@@   @@@@@@@@@   @@      @@         @@   @@@@
 #   rule_display = gets.chomp
 #   if rule_display = Y
     
-puts "Blackjack, or 21, is a card game of probability. 
+puts "Blackjack, also called 21, is a card game of probability. 
 The goal is to reach a face-value total close or equal to 21 without going over (bust).
     
 Blackjack is an Ace plus a Face (K, Q, J) or 10 card.
 
-Both you and the dealer will receive an initial deal of two cards.
+Both you and the Dealer will receive an initial deal of two cards.
     
-If the dealer receives Blackjack, you lose.
+If the Dealer receives Blackjack, you lose.
 If you receive Blackjack, you win.
 If you both receive Blackjack, the result is a draw and the game ends in a draw.
 
 If nobody receives Blackjack:
 You must decide to keep your current cards (stay), or draw another (hit) until you reach 21 or bust.
-The dealer MUST hit on 15 and stay on 16.
+After your cards have been dealt, it is the Dealer's turn.
+The Dealer MUST hit on 15 and stay on 16.
 The player with the highest face-value total without going bust wins.
-If the dealer and player tie, the result is a draw."
+If the Dealer and player tie, the result is a draw."
 
 
 
@@ -80,6 +81,7 @@ If the dealer and player tie, the result is a draw."
 #   # record choice
 #   # deliver random card
 #   # check win/loss/draw conditionals
+# remove dealt cards from the deck
 #   # if user does not win or bust, computer decides to stay or hit
 #   # if cpu wins, display @lose
 #   # if cpu busts display @win

@@ -3,8 +3,17 @@
 #     - must use suits (13 cards per suit)
 #     - must use face cards 
 
-card_values = [1..10]
-face_card_value = 10
-ace_value1 = 1
-ace_value2 = 11
-suits = ["Clubs", "Diamonds", "Hearts", "Spades"]
+class Card
+
+  attr_accessor :number, :suit, :value
+
+  def initialize(number, suit, value)
+    @number = number
+    @suit = suit
+    @value = value
+  end
+
+  def to_s
+    "#{@number} of #{suit}"
+  end
+end
