@@ -1,7 +1,7 @@
-# #card.rb (Card class) (use arrays)
-#     - use to designate each of the 52 cards 
-#     - must use suits (13 cards per suit)
-#     - must use face cards 
+# card.rb
+# => designate each of the 52 cards 
+# => must use suits (13 cards per suit)
+# => must use face cards 
 
 class Card
 
