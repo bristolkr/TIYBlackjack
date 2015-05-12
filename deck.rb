@@ -2,7 +2,7 @@ require_relative 'cards.rb'
 
  class Deck
 
-    attr_accessor :deck_cards, :public_deck
+  attr_accessor :deck_cards, :public_deck
 
   def initialize
     deck_cards = []
@@ -70,8 +70,12 @@ require_relative 'cards.rb'
 
     deck_cards.shuffle!
 
-    
     @public_deck = deck_cards
   
   end
+
+  def draw
+    @public_deck.shift
+  end
+
 end
