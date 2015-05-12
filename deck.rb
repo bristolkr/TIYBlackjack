@@ -9,7 +9,7 @@ require_relative 'cards.rb'
     @public_deck = nil
 
     # Spades
-    deck_cards << Card.new("A", "Spades", 1)
+    deck_cards << Card.new("A", "Spades", 11)
     deck_cards << Card.new("2", "Spades", 2)
     deck_cards << Card.new("3", "Spades", 3)
     deck_cards << Card.new("4", "Spades", 4)
@@ -24,7 +24,7 @@ require_relative 'cards.rb'
     deck_cards << Card.new("K", "Spades", 10)
 
     # Hearts
-    deck_cards << Card.new("A", "Hearts", 1)
+    deck_cards << Card.new("A", "Hearts", 11)
     deck_cards << Card.new("2", "Hearts", 2)
     deck_cards << Card.new("3", "Hearts", 3)
     deck_cards << Card.new("4", "Hearts", 4)
@@ -39,7 +39,7 @@ require_relative 'cards.rb'
     deck_cards << Card.new("K", "Hearts", 10)
      
     # Diamonds
-    deck_cards << Card.new("A", "Diamonds", 1)
+    deck_cards << Card.new("A", "Diamonds", 11)
     deck_cards << Card.new("2", "Diamonds", 2)
     deck_cards << Card.new("3", "Diamonds", 3)
     deck_cards << Card.new("4", "Diamonds", 4)
@@ -54,7 +54,7 @@ require_relative 'cards.rb'
     deck_cards << Card.new("K", "Diamonds", 10)
      
     # Clubs
-    deck_cards << Card.new("A", "Clubs", 1)
+    deck_cards << Card.new("A", "Clubs", 11)
     deck_cards << Card.new("2", "Clubs", 2)
     deck_cards << Card.new("3", "Clubs", 3)
     deck_cards << Card.new("4", "Clubs", 4)

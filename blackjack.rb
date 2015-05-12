@@ -1,5 +1,5 @@
 require_relative 'cards.rb'
-require_relative 'deckCopy.rb'
+require_relative 'deck.rb'
 
 # User Interface
 class Greeting
@@ -36,6 +36,8 @@ The goal is to reach a face-value total close or equal to 21 without going over 
     
 Blackjack is an Ace plus a Face (K, Q, J) or 10 card.
 
+Aces are high -- they have a value of 11.
+
 Both you and the Dealer will receive an initial deal of two cards.
     
 If the Dealer receives Blackjack, you lose.
@@ -67,9 +69,13 @@ greeting = Greeting.new
 
 class Hand
  
-  attr_accessor :player_card2, :player_card1, :dealer_card2, :dealer_card1
+  attr_accessor :player_card2, :player_card1, :dealer_card2, :dealer_card1, :player1_total, :dealer_total
+
 
   def initialize
+    @player1_total = 0
+    @dealer_total  = 0
+
     @deck_of_cards = Deck.new
     draw(@deck_of_cards.public_deck[0], 
       @deck_of_cards.public_deck[1], 
@@ -82,6 +88,9 @@ class Hand
     @player_card2 = @deck_of_cards.public_deck.pop
     @dealer_card1 = @deck_of_cards.public_deck.pop
     @dealer_card2 = @deck_of_cards.public_deck.pop
+
+    @player1_total = @player_card1.value + @player_card2.value
+    @dealer_total  = @dealer_card1.value + @dealer_card2.value
   end
 
 end
@@ -89,6 +98,7 @@ end
 hand = Hand.new
 
 puts "#{greeting.user}, your cards are #{hand.player_card1} and #{hand.player_card2}. My face-up card is #{hand.dealer_card1}."
+puts "Your total is: #{hand.player1_total}"
 
 
 # check instant win (blackjack)

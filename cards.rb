@@ -1,8 +1,3 @@
-# card.rb
-# => designate each of the 52 cards 
-# => must use suits (13 cards per suit)
-# => must use face cards 
-
 class Card
 
   attr_accessor :number, :suit, :value
