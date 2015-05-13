@@ -129,17 +129,18 @@ class Hand
 
 
   def initialize
-    @player_hand   = []
-    @dealer_hand   = []
+    @player_hand = []
+    @dealer_hand = []
 
     @deck_of_cards = Deck.new
   end
 
   def deal
     2.times do
-      @dealer_hand << @deck_of_cards.draw
-      @player_hand << @deck_of_cards.draw
-    end
+      @player_hand << @deck_of_cards.shift!
+      @dealer_hand << @deck_of_cards.shift!
+  end
+
   end
 
   # def draw
@@ -155,7 +156,7 @@ class Hand
   def player_hand_points
     @player_points = 0
     @player_hand.each do |card|
-      @points += card.value
+      @player_points += card.value
     end
   end
 
@@ -169,12 +170,15 @@ end
 
 hand = Hand.new
 
-puts "#{greeting.user}, your cards are #{hand.player_hand.inspect}. 
+puts "#{greeting.user}, your cards are:"
+  hand.player_hand.each { |card| puts card.to_s }
 
-My face-up card is #{hand.dealer_hand.inspect}.
-"
 
-puts "Your total is: #{hand.player_points}
+puts "My face-up card is:"
+  hand.dealer_hand.each { |card| puts card.first.to_s }
+
+
+puts "Your total is: #{@player_points.to_s}
 
 "
 # class Game

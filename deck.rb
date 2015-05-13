@@ -73,9 +73,4 @@ require_relative 'cards.rb'
     @public_deck = deck_cards
   
   end
-
-  def draw
-    @public_deck.shift
-  end
-
 end
