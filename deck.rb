@@ -1,4 +1,4 @@
-require_relative 'cards.rb'
+require_relative 'cards'
 
  class Deck
 
@@ -6,7 +6,7 @@ require_relative 'cards.rb'
 
   def initialize
     deck_cards = []
-   # @public_deck = nil
+    @public_deck = nil
 
     # Spades
     deck_cards << Card.new("A", "Spades", 11)

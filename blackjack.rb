@@ -5,8 +5,8 @@ require_relative 'deck'
 class Greeting
   
   attr_reader :user
+
   def initialize
-    @user = nil
     puts "
 ...................................:............,:=?............................
 ..................................+,..................~?........................
@@ -61,7 +61,7 @@ class Greeting
 ...........................?+=~:::~~~~~~~~:~~=+?................................
 
 "
-puts "
+    puts "
 
 @@@@@@      @@        @@@@@@@@@   @@@@@@@@@   @@      @@         @@   @@@@@@@@@   @@@@@@@@@@   @@     @@
 @@@@@@@@    @@        @@     @@   @@@@@@@@@   @@     @@          @@   @@     @@   @@@@@@@@@@   @@    @@
@@ -78,12 +78,13 @@ puts "
 
 "
     puts "Welcome to Blackjack! What is your name? "
-      @user = gets.chomp.capitalize!
+    @user = gets.chomp.capitalize
 
     puts "Great! #{@user}, do you need to look at the rules (Y/N)? "
-      rules = gets.chomp.upcase!
-      if rules == "Y"
-        puts "
+    rules = gets.chomp.upcase
+
+    if rules == "Y"
+      puts "
 
 Blackjack, also called 21, is a card game of probability. 
 The goal is to reach a face-value total close or equal to 21 without going over (bust).
@@ -107,26 +108,16 @@ If the Dealer and player tie, the result is a draw.
 
 Let's play, #{@user}!
 "
-      elsif rules == "N"
+    elsif rules == "N"
       puts "Thanks, #{@user}. Let's begin.
       "
     end
   end
 end
-greeting = Greeting.new
 
-
-# set ace value and run dependency, also, do this later when you're not sleep-deprived.
-# puts "Would you like Aces to be high? (Y/N)? "
-#   @ace_high = gets.chomp
-#   if @ace_high = Y
-#     else 
-#   end
-
-class Hand < Deck
+class Hand
  
   attr_accessor :player_hand, :dealer_hand, :player_points, :dealer_points
-
 
   def initialize
     @player_hand = []
@@ -141,34 +132,50 @@ class Hand < Deck
       @dealer_hand.push(@deck_of_cards.draw)
     end
   end
+
+  def player_hand_points
+    @player_points = 0
+    @player_hand.each do |card|
+      @player_points += card.value
+    end
+    @player_points
+  end
+
+  def dealer_hand_points
+    @dealer_points = 0
+    @dealer_hand.each do |card|
+      @dealer_points += card.value
+    end
+    @dealer_points
+  end
 end
 
-#   def player_hand_points
-#     @player_points = 0
-#     @player_hand.each do |card|
-#       @player_points += card.value
-#     end
-#   end
-
-#     def dealer_hand_points
-#     @dealer_points = 0
-#     @dealer_hand.each do |card|
-#       @dealer_points += card.value
-#     end
-#   end
-# end
+greeting = Greeting.new
 
 hand = Hand.new
+
+hand.deal
 
 puts "#{greeting.user}, your cards are:"
   hand.player_hand.each { |card| puts card.to_s }
 
+puts "
+My face-up card is: " + hand.dealer_hand.first.to_s
 
-puts "My face-up card is:"
-  hand.dealer_hand.each { |card| puts card.first.to_s }
+puts "
+Your total is: #{hand.player_hand_points.to_s}"
 
 
-#puts "Your total is: #{@player_points.to_s}"
+# winner = nil
+
+# loop do
+#   # do thing, hit or stay?
+
+#   break if winner
+# end
+
+
+
 
 
 # class Game
