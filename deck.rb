@@ -6,7 +6,7 @@ require_relative 'cards.rb'
 
   def initialize
     deck_cards = []
-    @public_deck = nil
+   # @public_deck = nil
 
     # Spades
     deck_cards << Card.new("A", "Spades", 11)
@@ -71,6 +71,10 @@ require_relative 'cards.rb'
     deck_cards.shuffle!
 
     @public_deck = deck_cards
+
+    def draw
+      @public_deck.shift
+    end
   
   end
 end

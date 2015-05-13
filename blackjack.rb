@@ -1,5 +1,5 @@
-require_relative 'cards.rb'
-require_relative 'deck.rb'
+require_relative 'cards'
+require_relative 'deck'
 
 # User Interface
 class Greeting
@@ -123,7 +123,7 @@ greeting = Greeting.new
 #     else 
 #   end
 
-class Hand
+class Hand < Deck
  
   attr_accessor :player_hand, :dealer_hand, :player_points, :dealer_points
 
@@ -137,36 +137,26 @@ class Hand
 
   def deal
     2.times do
-      @player_hand << @deck_of_cards.shift!
-      @dealer_hand << @deck_of_cards.shift!
-  end
-
-  end
-
-  # def draw
-  #   @player_card1 = @deck_of_cards.draw
-  #   @player_card2 = @deck_of_cards.draw
-  #   @dealer_card1 = @deck_of_cards.draw
-  #   @dealer_card2 = @deck_of_cards.draw
-
-  #   @player1_total = @player_card1.value + @player_card2.value
-  #   @dealer_total  = @dealer_card1.value + @dealer_card2.value 
-  # end
-
-  def player_hand_points
-    @player_points = 0
-    @player_hand.each do |card|
-      @player_points += card.value
-    end
-  end
-
-    def dealer_hand_points
-    @dealer_points = 0
-    @dealer_hand.each do |card|
-      @dealer_points += card.value
+      @player_hand.push(@deck_of_cards.draw)
+      @dealer_hand.push(@deck_of_cards.draw)
     end
   end
 end
+
+#   def player_hand_points
+#     @player_points = 0
+#     @player_hand.each do |card|
+#       @player_points += card.value
+#     end
+#   end
+
+#     def dealer_hand_points
+#     @dealer_points = 0
+#     @dealer_hand.each do |card|
+#       @dealer_points += card.value
+#     end
+#   end
+# end
 
 hand = Hand.new
 
@@ -178,9 +168,9 @@ puts "My face-up card is:"
   hand.dealer_hand.each { |card| puts card.first.to_s }
 
 
-puts "Your total is: #{@player_points.to_s}
+#puts "Your total is: #{@player_points.to_s}"
 
-"
+
 # class Game
 
 #   attr_accessor :player_points, :dealer_points, :win, :lose, :draw
