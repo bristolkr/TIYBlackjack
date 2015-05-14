@@ -122,7 +122,8 @@ class Hand
   def initialize
     @player_hand = []
     @dealer_hand = []
-
+    @player_points = nil
+    @dealer_points = nil
     @deck_of_cards = Deck.new
   end
 
@@ -166,15 +167,17 @@ puts "
 Your total is: #{hand.player_hand_points.to_s}"
 
 
-class Game
+class Game 
 
-  attr_accessor :player_points, :dealer_points, :winner, :loser, :draw
+  attr_accessor :player_points, :dealer_points, :winner, :loser, :draw, :hand
 
-  def initialize 
+  def initialize(gameHandGlobal)
     
     winner = nil
     loser = nil
     draw = nil
+
+    @hand = gameHandGlobal
 
   end
 
@@ -187,50 +190,55 @@ class Game
   end
 
   def play
-    if hand.player_hand_points.player_points == 21
-      puts "I have a busted ass here, and no one is kissing it. You win, #{@user}!"
-    end
-      
-    loop do 
-      if hand.player_hand_points.player_points < 21
-      puts "#{@user}, would you like to stay (S) or hit (H)? "
-      stay_hit = gets.chomp.upcase
+      if @hand.player_points == 21
+        puts "I have a busted ass here, and no one is kissing it. You win!"
+      end
+        
+      loop do 
+       if hand.player_points < 21
+         puts "Would you like to stay (S) or hit (H)? "
+         stay_hit = gets.chomp.upcase
         if stay_hit == "H"
-          while hand.player_hand_points.player_points < 21
-            game.deal_player
-            puts "#{greeting.user}, your cards are:"
+          while hand.player_points < 21 do
+            self.deal_player
+            puts "Your cards are:"
             hand.player_hand.each { |card| puts card.to_s }
             puts "Your total is: #{hand.player_hand_points.to_s}"
-              if hand.player_hand_points.player_points > 21
-              puts "You know what cheers me up? Other people’s misfortune, #{@user}. You bust."
+              if hand.player_points > 21
+                puts "You know what cheers me up? Other people’s misfortune. You bust."
               end
-          end
+         end
         elsif stay_hit == "S"
-          while hand.dealer_hand_points.dealer_points < 16
-            game.deal_dealer
-              if hand.dealer_hand_points.dealer_points >= 16 and hand.dealer_hand_points.dealer_points <= 21
+          while hand.dealer_points <= 16 do
+            self.deal_dealer
+              if hand.dealer_points >= 16 and hand.dealer_points <= 21
                 hand.dealer_hand.each { |card| puts card.to_s }
-                winner = hand.player_hand_points.player_points > hand.dealer_hand_points.dealer_points
-                loser = hand.player_hand_points.player_points < hand.dealer_hand_points.dealer_points
-                draw = hand.player_hand_points.player_points == hand.dealer_hand_points.dealer_points
+                winner = hand.player_points > hand.dealer_points
+                loser = hand.player_points < hand.dealer_points
+                draw = hand.player_points == hand.dealer_points
               end
-          end
+            end
         end
+      end
+    end
 
-    if winner 
-      then puts "I have a busted ass here, and no one is kissing it. You win, #{@user}!" 
+    if winner == true
+      then puts "I have a busted ass here, and no one is kissing it. You win!" 
     end
-    if loser 
-      then puts "You know what cheers me up? Other people’s misfortune, #{@user}. You lose." 
+
+    if loser == true
+      then puts "You know what cheers me up? Other people’s misfortune. You lose." 
     end
-    if draw 
-      then puts "We tied, #{@user}! Man, this is fun on a bun!" 
+
+    if draw == true
+      then puts "We tied! Man, this is fun on a bun!" 
     end
     
-  end
+  end #end play method
+
 end
 
 
-game = Game.new
+game = Game.new hand
 
 game.play
