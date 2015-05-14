@@ -133,8 +133,6 @@ class Hand
     end
   end
 
-
-
   def player_hand_points
     @player_points = 0
     @player_hand.each do |card|
@@ -170,83 +168,69 @@ Your total is: #{hand.player_hand_points.to_s}"
 
 class Game
 
-  attr_accessor :player_points, :dealer_points, :win, :lose, :draw
+  attr_accessor :player_points, :dealer_points, :winner, :loser, :draw
 
   def initialize 
-    # @win  = 0
-    # @lose = 0
-    # @draw = 0
-
+    
     winner = nil
+    loser = nil
+    draw = nil
+
   end
 
-# loop do
-#   # do thing, hit or stay?
-
-#   break if winner
-# end
-
   def deal_player
-      hand.player_hand.push(@deck_of_cards.draw)
+    hand.player_hand.push(@deck_of_cards.draw)
   end
 
   def deal_dealer
-      hand.dealer_hand.push(@deck_of_cards.draw)
+    hand.dealer_hand.push(@deck_of_cards.draw)
   end
 
   def play
     if hand.player_hand_points.player_points == 21
-        #@win += 1
-        puts "I have a busted ass here, and no one is kissing it. You win, #{@user}!"
+      puts "I have a busted ass here, and no one is kissing it. You win, #{@user}!"
     end
+      
+    loop do 
+      if hand.player_hand_points.player_points < 21
+      puts "#{@user}, would you like to stay (S) or hit (H)? "
+      stay_hit = gets.chomp.upcase
+        if stay_hit == "H"
+          while hand.player_hand_points.player_points < 21
+            game.deal_player
+            puts "#{greeting.user}, your cards are:"
+            hand.player_hand.each { |card| puts card.to_s }
+            puts "Your total is: #{hand.player_hand_points.to_s}"
+              if hand.player_hand_points.player_points > 21
+              puts "You know what cheers me up? Other people’s misfortune, #{@user}. You bust."
+              end
+          end
+        elsif stay_hit == "S"
+          while hand.dealer_hand_points.dealer_points < 16
+            game.deal_dealer
+              if hand.dealer_hand_points.dealer_points >= 16 and hand.dealer_hand_points.dealer_points <= 21
+                hand.dealer_hand.each { |card| puts card.to_s }
+                winner = hand.player_hand_points.player_points > hand.dealer_hand_points.dealer_points
+                loser = hand.player_hand_points.player_points < hand.dealer_hand_points.dealer_points
+                draw = hand.player_hand_points.player_points == hand.dealer_hand_points.dealer_points
+              end
+          end
+        end
+
+    if winner 
+      then puts "I have a busted ass here, and no one is kissing it. You win, #{@user}!" 
+    end
+    if loser 
+      then puts "You know what cheers me up? Other people’s misfortune, #{@user}. You lose." 
+    end
+    if draw 
+      then puts "We tied, #{@user}! Man, this is fun on a bun!" 
+    end
+    
   end
 end
+
 
 game = Game.new
 
 game.play
-
-    # loop do 
-    #   if hand.player_hand_points < BLACKJACK
-    #     puts "#{@user}, would you like to stay (S) or hit (H)? "
-    #       stay_hit = gets.chomp.upcase
-    #         if stay_hit == "H"
-    #           game.deal_player
-    #         elsif stay_hit == "S"
-    #           exit
-    #         end
-    #       end
-                
-  
-    #   elsif hand.player_hand_points > BLACKJACK
-    #     puts "You know what cheers me up? Other people’s misfortune, #{@user}. You lose. Your record is #{@win} wins, #{@lose} losses, #{@draw} draws. Would you like to play again (Y/N)? "
-    
-#       #   stay_hit = gets.chomp.upcase!
-          
-#       #     if stay_hit == "H"
-
-#       # end
-
-# end
-# 
-
-
-# record choice
-# deliver random card
-# check win/loss/draw conditionals
-# remove dealt cards from the deck
-# loop s/h until player stays, reaches 21, or busts
-# cpu then takes turn
-# cpu must stay on 16
-# if cpu wins, display @lose
-# if cpu busts display @win
-# if cpu and player tie, display @draw
-
-
-# puts "You know what cheers me up? Other people’s misfortune, #{@user}. You lose. Your record is #{@win} wins, #{@lose} losses, #{@draw} draws. Would you like to play again (Y/N)? "
-
-# puts "I have a busted ass here, and no one is kissing it. You win, #{@user}! Your record is #{@win} wins, #{@lose} losses, #{@draw} draws. Would you like to play again (Y/N)? "
-
-# puts "We tied, #{@user}! Man, this is fun on a bun. Your record is #{@win} wins, #{@lose} losses, #{@draw} draws. Would you like to play again (Y/N)? "
-
-
