@@ -182,11 +182,11 @@ class Game
   end
 
   def deal_player
-    hand.player_hand.push(@deck_of_cards.draw)
+    @hand.player_hand.push(@hand.deck_of_cards.draw)
   end
 
   def deal_dealer
-    hand.dealer_hand.push(@deck_of_cards.draw)
+    @hand.dealer_hand.push(@hand.deck_of_cards.draw)
   end
 
   def play
@@ -195,27 +195,27 @@ class Game
       end
         
       loop do 
-       if hand.player_points < 21
+       if @hand.player_points < 21
          puts "Would you like to stay (S) or hit (H)? "
          stay_hit = gets.chomp.upcase
         if stay_hit == "H"
-          while hand.player_points < 21 do
+          while @hand.player_points < 21 do
             self.deal_player
             puts "Your cards are:"
-            hand.player_hand.each { |card| puts card.to_s }
+            @hand.player_hand.each { |card| puts card.to_s }
             puts "Your total is: #{hand.player_hand_points.to_s}"
-              if hand.player_points > 21
+              if @hand.player_points > 21
                 puts "You know what cheers me up? Other people’s misfortune. You bust."
               end
          end
         elsif stay_hit == "S"
-          while hand.dealer_points <= 16 do
+          while @hand.dealer_points < 16 do
             self.deal_dealer
-              if hand.dealer_points >= 16 and hand.dealer_points <= 21
-                hand.dealer_hand.each { |card| puts card.to_s }
-                winner = hand.player_points > hand.dealer_points
-                loser = hand.player_points < hand.dealer_points
-                draw = hand.player_points == hand.dealer_points
+              if @hand.dealer_points >= 16 and @hand.dealer_points <= 21
+                @hand.dealer_hand.each { |card| puts card.to_s }
+                winner = @hand.player_points > @hand.dealer_points
+                loser = @hand.player_points < @hand.dealer_points
+                draw = @hand.player_points == @hand.dealer_points
               end
             end
         end
@@ -223,15 +223,15 @@ class Game
     end
 
     if winner == true
-      then puts "I have a busted ass here, and no one is kissing it. You win!" 
+      puts "I have a busted ass here, and no one is kissing it. You win!" 
     end
 
     if loser == true
-      then puts "You know what cheers me up? Other people’s misfortune. You lose." 
+      puts "You know what cheers me up? Other people’s misfortune. You lose." 
     end
 
     if draw == true
-      then puts "We tied! Man, this is fun on a bun!" 
+      puts "We tied! Man, this is fun on a bun!" 
     end
     
   end #end play method
