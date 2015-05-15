@@ -107,7 +107,7 @@ end
 
 class Hand
  
-  attr_accessor :player_hand, :dealer_hand, :player_points, :dealer_points
+  attr_accessor :player_hand, :dealer_hand, :player_points, :dealer_points, :deck_of_cards
 
   def initialize
     @player_hand = []
@@ -167,6 +167,9 @@ class Game
     loser = nil
     draw = nil
 
+    #sloppy bug fix. Not proud of this...
+    @game_is_complete = false
+
     @hand = gameHandGlobal
 
   end
@@ -185,18 +188,19 @@ class Game
         exit
       end
         
-      loop do 
+      while @game_is_complete != true do 
        if @hand.player_points < 21
          puts "Would you like to stay (S) or hit (H)? "
          stay_hit = gets.chomp.upcase
         if stay_hit == "H"
           while @hand.player_points < 21 do
             self.deal_player
-            puts "Your cards are:"
+            puts "\n\nYour cards are:"
             @hand.player_hand.each { |card| puts card.to_s }
             puts "Your total is: #{hand.player_hand_points.to_s}"
               if @hand.player_points > 21
-                puts "You know what cheers me up? Other people’s misfortune. You bust."
+                winner = true
+                @game_is_complete = true
               end
          end
         elsif stay_hit == "S"
@@ -211,6 +215,8 @@ class Game
             end
         end
       end
+
+
     end
 
     if winner == true
