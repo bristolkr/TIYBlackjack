@@ -159,7 +159,7 @@ Your total is: #{hand.player_hand_points.to_s}"
 
 class Game 
 
-  attr_accessor :player_points, :dealer_points, :winner, :loser, :draw, :hand
+  attr_accessor :player_points, :dealer_points, :draw, :hand, :player_hand, :dealer_hand, :deck_of_cards
 
   def initialize(gameHandGlobal)
     
@@ -180,17 +180,24 @@ class Game
   end
 
   def play
-      if @hand.player_points == 21
+      
+        
+      loop do 
+        if @hand.player_points == 21
         puts "I have a busted ass here, and no one is kissing it. You win!"
         exit
       end
-        
-      loop do 
-       # if @hand.player_points < 21
+
          puts "Would you like to stay (S) or hit (H)? "
          stay_hit = gets.chomp.upcase
+         
         if stay_hit == "H"
-          while @hand.player_points <= 21 do
+          if @hand.player_points > 21
+            puts "You know what cheers me up? Other people’s misfortune. You bust."
+            exit
+          end
+
+          while @hand.player_points <= 20 do
             self.deal_player
             puts "Your cards are:"
             @hand.player_hand.each { |card| puts card.to_s }
@@ -199,14 +206,15 @@ class Game
             stay_hit = gets.chomp.upcase
           end
 
-          if @hand.player_points > 21
-          puts "You know what cheers me up? Other people’s misfortune. You bust."
-            exit
-          end
+          
+
 
         elsif stay_hit == "S"
           while @hand.dealer_points < 16 do
             self.deal_dealer
+            puts "My cards are:"
+            @hand.dealer_hand.each { |card| puts card.to_s }
+            puts "My total is: #{hand.dealer_hand_points.to_s}"
           end
 
           if @hand.dealer_points >= 16 and @hand.dealer_points <= 21
@@ -217,7 +225,6 @@ class Game
             draw = @hand.player_points == @hand.dealer_points
           end
         end
-      # end
     end
 
     if winner == true
